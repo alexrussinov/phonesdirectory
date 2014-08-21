@@ -1,0 +1,68 @@
+@(message: String)
+@import helper.twitterBootstrap._
+@main("Phones book"){
+
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+    </div>
+    <div class="col-lg-4"></div>
+</div>
+<div class="row">
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8">
+      <br>
+      <div class="panel panel-default">
+          <div class="panel-heading">Добавить запись</div>
+          <div class="panel-body">
+              <div>
+                  <form class="form-inline" name="addEntryForm" novalidate>
+                      <div class="form-group">
+                          <input type="text" class="form-control" name="name" placeholder="Phone" ng-model="entryName" required/>
+                      </div>
+                      @*<span class="error" style="color: red" ng-show="addEntryForm.name.$error.required"> Поле не может быть пустым!</span>*@
+                      <div class="form-group">
+                          <input type="tel" name="phone" class="form-control" id="inputTel" placeholder="Телефон" ng-model="entryPhone" ng-pattern="/^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$/" required>
+                          @*<span class="error" style="color: red" ng-show="addEntryForm.phone.$error.required"> Поле не может быть пустым!</span>*@
+                          <span class="error" style="color: red" ng-show="addEntryForm.phone.$error.pattern"> Не верный формат!</span>
+                      </div>
+                      <button type="submit" class="btn btn-primary" ng-disabled="addEntryForm.$invalid" ng-click="insert()">Добавить</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+      <div class="alert alert-danger alert-dismissible" role="alert" ng-show="entryExist">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          Данная запись уже существует!
+      </div>
+      <div class="alert alert-success alert-dismissible" role="alert" ng-show="entryInserted">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          Запись успешно добавлена!
+      </div>
+  <table class="table table-bordered" style="margin-top: 20px">
+    <tr>
+        <th></th>
+        <th>Имя Фамилия</th>
+        <th>Телефон</th>
+    </tr>
+    <tr ng-repeat="entry in entries">
+        <td>{{$index+1}}</td>
+        @*<td>{{entry.name}}</td>*@
+        <td><editable-name text="entry.name"></editable-name></td>
+        @*<td>{{entry.phone_number}}</td>*@
+        <td><editable-phone text="entry.phone_number"></editable-phone></td>
+        <td ng-hide="editMode">
+        <i class='glyphicon glyphicon-edit' ng-click="editMode = true"></i>
+        <i class='glyphicon glyphicon-trash' ng-click="deleteEntry(entry)"></i>
+        </td>
+        <td class='control-buttons' ng-show="editMode">
+            <i class='glyphicon glyphicon-ok ' ng-click="updateEntry(entry)"></i>
+            <i class='glyphicon glyphicon-remove ' ng-click="cancel()"></i>
+        </td>
+    </tr>
+  </table>
+      <pagination boundary-links="true" total-items="totalItems" max-size="maxSize" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+ </div>
+<div class="col-lg-2"></div>
+</div>
+}

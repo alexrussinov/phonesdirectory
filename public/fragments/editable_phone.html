@@ -1,0 +1,6 @@
+<div>
+    <span ng-hide="editMode" ng-click="editMode = true">{{entry.phone_number}}</span>
+    <form name="formPhone"><input name="phone" ng-show="editMode" type="tel" ng-model="entry.phone_number" ng-pattern='/^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$/' required/></form>
+    <span class="error" style="color: red" ng-show="formPhone.phone.$error.required && editMode"> Поле не может быть пустым!</span>
+    <span class="error" style="color: red" ng-show="formPhone.phone.$error.pattern && editMode"> Не верный формат!</span>
+</div>

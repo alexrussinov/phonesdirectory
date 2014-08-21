@@ -1,0 +1,5 @@
+<div>
+    <span ng-hide="editMode" ng-click="editMode = true">{{entry.name}}</span>
+    <form name="nameForm"><input  name="name" ng-show="editMode" type="text" ng-model="entry.name" required/></form>
+    <span class="error" style="color: red" ng-show="nameForm.name.$error.required"> Поле не может быть пустым!</span>
+</div>

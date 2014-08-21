@@ -1,0 +1,40 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html ng-app="phonesBook">
+    <head>
+        <title>@title</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.css"))'>
+        <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
+        <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.js"))'></script>
+        <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("angular.min.js"))'></script>
+        <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+        <script src="@routes.Assets.at("javascripts/app.js")" type="text/javascript"></script>
+        <style>
+        body {
+        margin-top: 50px;
+        }
+        </style>
+    </head>
+
+    <body ng-controller="PhoneListCtrl">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">@title</a>
+                    <form class="navbar-form navbar-right"  role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Поиск" ng-model="query">
+                        </div>
+                        <button  class="btn btn-default" ng-click="search()">Искать...</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <div class="container" >
+        @content
+        </div>
+    </body>
+</html>
