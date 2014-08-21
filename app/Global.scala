@@ -21,7 +21,7 @@ object Global extends GlobalSettings  {
       // get test data
       val test_data = Imports.importFromCsvWithHeaders("app/us-500.csv",",")
 
-      // generate phones entries for insert
+      // generate phones entries for insert data
       val phones500 = PhonesBook.toPhoneEntry(test_data)
 
       DB.withSession { implicit s: Session =>
